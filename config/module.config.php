@@ -1,8 +1,12 @@
 <?php
 /**
- * @author Erik Norgren <erik.norgren@interactivesolutions.se>
+ * @author    Erik Norgren <erik.norgren@interactivesolutions.se>
+ * @author    Antoine Hedgecock <antoine.hedgecock@gmail.com>
+ *
  * @copyright Interactive Solutions
  */
+
+declare(strict_types = 1);
 
 use InteractiveSolutions\PushNotification\ApnsClient;
 use InteractiveSolutions\PushNotification\ApnsOptions;
@@ -15,7 +19,6 @@ use InteractiveSolutions\PushNotification\Factory\Controller\DeviceCollectionCon
 use InteractiveSolutions\PushNotification\Factory\GcmClientFactory;
 use InteractiveSolutions\PushNotification\Factory\GcmOptionsFactory;
 use InteractiveSolutions\PushNotification\Factory\Listener\PushNotificationListenerFactory;
-use InteractiveSolutions\PushNotification\Factory\NotificationServiceDelegateFactory;
 use InteractiveSolutions\PushNotification\Factory\Service\DeviceServiceFactory;
 use InteractiveSolutions\PushNotification\Factory\Service\PushNotificationServiceFactory;
 use InteractiveSolutions\PushNotification\Factory\Validator\DeviceDoesNotExistFactory;
@@ -25,7 +28,6 @@ use InteractiveSolutions\PushNotification\Listener\PushNotificationListener;
 use InteractiveSolutions\PushNotification\Service\DeviceService;
 use InteractiveSolutions\PushNotification\Service\PushNotificationService;
 use InteractiveSolutions\PushNotification\Validator\DeviceDoesNotExist;
-use Isis\Notification\Service\NotificationService;
 
 return [
     'service_manager' => [
@@ -40,12 +42,6 @@ return [
             PushNotificationService::class => PushNotificationServiceFactory::class,
 
             PushNotificationListener::class => PushNotificationListenerFactory::class,
-        ],
-
-        'delegators' => [
-            NotificationService::class => [
-                NotificationServiceDelegateFactory::class,
-            ],
         ],
     ],
 

@@ -20,6 +20,7 @@ use Canine\User\Repository\UserRepository;
 use DateTime;
 use Zend\Http\Request;
 use Zend\Http\Response;
+use Zend\View\Model\JsonModel;
 use ZfrRest\Http\Exception\Client\ForbiddenException;
 use ZfrRest\Http\Exception\Client\NotFoundException;
 use ZfrRest\Http\Exception\Client\UnprocessableEntityException;
@@ -126,9 +127,9 @@ final class DeviceCollectionController extends AbstractRestfulController
      * @throws ForbiddenException
      * @throws NotFoundException
      */
-    public function get(): ResourceViewModel
+    public function get(): JsonModel
     {
-        $devices = $this->deviceRepository->getAllForUser($this->getUser(MobileDevicePermissions::LIST_DEVICES));
+        $devices = $this->deviceRepository->getAllForUser($this->getUser(MobileDevicePermissions::DEVICE_LIST));
         $devices = array_map(function (AbstractDeviceEntity $device) {
             return [
                 'type'      => $device->getType(),
@@ -139,6 +140,15 @@ final class DeviceCollectionController extends AbstractRestfulController
             ];
         }, $devices);
 
-        return new ResourceViewModel(['devices' => $devices], ['template' => 'devices/devices']);
+        // todo: perhaps we should use a proper paginator
+        // but I simply don't see anyone have so many devices it would be required
+        return new JsonModel([
+            'data' => $devices,
+            'meta' => [
+                'total'  => count($devices),
+                'limit'  => count($devices),
+                'offset' => 0
+            ]
+        ]);
     }
 }

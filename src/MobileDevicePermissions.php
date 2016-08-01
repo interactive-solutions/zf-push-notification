@@ -12,6 +12,4 @@ final class MobileDevicePermissions
 {
     const DEVICE_CREATE = 'interactive-solutions:push-notification:device:create';
     const DEVICE_LIST   = 'interactive-solutions:push-notification:device:list';
-
-    
 }
