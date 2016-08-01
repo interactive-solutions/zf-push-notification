@@ -1,0 +1,31 @@
+{
+  "name": "interactive-solutions/zf-push-notification",
+  "description": "User and device association as well as background tasks to send push notifications",
+  "type": "module",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Antoine Hedgecock",
+      "email": "antoine.hedgecock@gmail.com"
+    }
+  ],
+
+  "requires": {
+    "php": ">=7.0",
+
+    "zendframework/zendservice-apple-apns": "^1.2",
+    "zendframework/zendservice-google-gcm": "^1.0",
+
+    "zfc-commons/zfc-rbac": "~2.4"
+  },
+
+  "autoload": {
+    "psr-0": {
+      "InteractiveSolutions\\PushNotification": "src/"
+    },
+
+    "classmap": [
+      "./Module.php"
+    ]
+  }
+}
